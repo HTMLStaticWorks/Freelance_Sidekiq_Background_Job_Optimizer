@@ -88,16 +88,37 @@
             margin-right: 1rem;
         }
 
+        @media (min-width: 1025px) {
+            .dashboard-grid {
+                display: block;
+            }
+            aside {
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                width: 280px;
+            }
+            .main-content {
+                margin-left: 280px;
+            }
+        }
+
         @media (max-width: 1024px) {
             .dashboard-grid {
                 grid-template-columns: 1fr;
             }
             .dashboard-header {
-                position: sticky;
+                position: fixed;
                 top: 0;
+                left: 0;
+                right: 0;
                 z-index: 1000;
                 background: var(--background);
                 padding-top: 0.75rem !important;
+            }
+            .main-content {
+                padding-top: 7.25rem;
             }
             aside {
                 position: fixed;
@@ -131,6 +152,17 @@
             }
             .main-content {
                 padding: 1rem;
+                padding-top: 6.75rem;
+            }
+            #section-queues .dash-card {
+                overflow-x: auto !important;
+                overflow-y: hidden;
+            }
+            #section-queues table {
+                min-width: 540px;
+            }
+            .chart-grid .dash-card {
+                overflow: hidden;
             }
             .dashboard-header {
                 flex-direction: row !important;

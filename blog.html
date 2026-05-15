@@ -18,7 +18,7 @@
             align-items: center;
         }
 
-        @media (min-width: 1025px) {
+          @media (min-width: 1025px) {
             .blog-hero-grid {
                 grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
             }
@@ -27,11 +27,14 @@
                 flex-direction: column;
                 height: 100%;
             }
+            .blog-hero-grid > .blog-hero-card:last-child:nth-child(3n + 1) {
+                grid-column: 2;
+            }
             .blog-hero-btn {
                 margin-top: auto;
                 align-self: flex-start;
             }
-        }
+          }
 
         @media (max-width: 1024px) {
             .responsive-grid-2 {
@@ -52,6 +55,9 @@
         }
 
         @media (min-width: 641px) and (max-width: 1024px) {
+            .tips-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            }
             .tips-grid .tips-card-third {
                 grid-column: 1 / -1;
                 justify-self: center;
