@@ -113,6 +113,12 @@
         .auth-meta a {
             white-space: nowrap;
         }
+        .forgot-link {
+            transition: color 0.2s ease;
+        }
+        .forgot-link:hover {
+            color: var(--accent) !important;
+        }
         @media (max-width: 640px) {
             .auth-meta {
                 gap: 0.5rem;
@@ -158,7 +164,7 @@
                 <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-secondary); cursor: pointer;">
                     <input type="checkbox" style="accent-color: var(--accent);"> REMEMBER ME
                 </label>
-                <a href="#" class="text-secondary" style="font-size: 0.8rem; text-decoration: none;">FORGOT PASSWORD?</a>
+                <a href="#" class="text-secondary forgot-link" style="font-size: 0.8rem; text-decoration: none;">FORGOT PASSWORD?</a>
             </div>
             <button type="submit" class="btn btn-primary" style="width: 100%;">AUTHENTICATE</button>
             <div style="margin-top: 1.5rem; text-align: center;">
