@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Technical Blog | SidePulse Insights</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -15,6 +16,21 @@
             grid-template-columns: 1fr 1.5fr;
             gap: 4rem;
             align-items: center;
+        }
+
+        @media (min-width: 1025px) {
+            .blog-hero-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+            }
+            .blog-hero-card {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+            }
+            .blog-hero-btn {
+                margin-top: auto;
+                align-self: flex-start;
+            }
         }
 
         @media (max-width: 1024px) {
@@ -31,6 +47,15 @@
                 flex-direction: column;
             }
             .newsletter-form button {
+                width: 100%;
+            }
+        }
+
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .tips-grid .tips-card-third {
+                grid-column: 1 / -1;
+                justify-self: center;
+                max-width: 360px;
                 width: 100%;
             }
         }
@@ -70,43 +95,43 @@
     <main>
         <section style="padding-top: 160px; padding-bottom: 60px;">
             <div class="container">
-                <div style="max-width: 800px; margin-bottom: 4rem;">
+                <div style="max-width: 800px; margin: 0 auto 4rem; text-align: center;">
                     <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem;">The <span class="text-gradient">Optimization Guide</span></h1>
                     <p class="text-secondary" style="font-size: 1.25rem;">Deep dives into Sidekiq internals, Redis tuning, and Ruby background job architecture.</p>
                 </div>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem;">
+                <div class="blog-hero-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem;">
                     
                     <!-- Blog 1 -->
-                    <article class="glass-card">
+                    <article class="glass-card blog-hero-card">
                         <div style="color: var(--accent); font-size: 0.8rem; font-weight: 600; margin-bottom: 1rem;" class="mono">MAY 12, 2026 // SCALING</div>
                         <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Scaling Sidekiq to 10M Jobs/Day on AWS Elasticache</h2>
                         <p class="text-secondary" style="margin-bottom: 1.5rem; font-size: 0.95rem;">A deep dive into Redis RDB vs AOF settings, connection pooling, and why you should avoid large payloads in your job arguments.</p>
-                        <a href="#" class="btn btn-outline" style="font-size: 0.8rem;">READ_DOCS</a>
+                        <a href="#" class="btn btn-outline blog-hero-btn" style="font-size: 0.8rem;">READ_DOCS</a>
                     </article>
 
                     <!-- Blog 2 -->
-                    <article class="glass-card">
+                    <article class="glass-card blog-hero-card">
                         <div style="color: var(--accent); font-size: 0.8rem; font-weight: 600; margin-bottom: 1rem;" class="mono">APR 28, 2026 // MEMORY</div>
                         <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Debugging Ruby Memory Leaks in Sidekiq Workers</h2>
                         <p class="text-secondary" style="margin-bottom: 1.5rem; font-size: 0.95rem;">How to use ObjectSpace and memory_profiler to track down RSS growth and why jemalloc is a game-changer for Rails backgrounds.</p>
-                        <a href="#" class="btn btn-outline" style="font-size: 0.8rem;">READ_DOCS</a>
+                        <a href="#" class="btn btn-outline blog-hero-btn" style="font-size: 0.8rem;">READ_DOCS</a>
                     </article>
 
                     <!-- Blog 3 -->
-                    <article class="glass-card">
+                    <article class="glass-card blog-hero-card">
                         <div style="color: var(--accent); font-size: 0.8rem; font-weight: 600; margin-bottom: 1rem;" class="mono">APR 15, 2026 // ARCHITECTURE</div>
                         <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">ActiveJob vs Sidekiq-native: Which one for scale?</h2>
                         <p class="text-secondary" style="margin-bottom: 1.5rem; font-size: 0.95rem;">The pros and cons of abstraction layers and why direct Sidekiq API usage is often necessary for high-throughput systems.</p>
-                        <a href="#" class="btn btn-outline" style="font-size: 0.8rem;">READ_DOCS</a>
+                        <a href="#" class="btn btn-outline blog-hero-btn" style="font-size: 0.8rem;">READ_DOCS</a>
                     </article>
 
                     <!-- Blog 4 -->
-                    <article class="glass-card">
+                    <article class="glass-card blog-hero-card">
                         <div style="color: var(--accent); font-size: 0.8rem; font-weight: 600; margin-bottom: 1rem;" class="mono">MAR 22, 2026 // REDIS</div>
                         <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Optimizing Redis Connection Pools for Puma & Sidekiq</h2>
                         <p class="text-secondary" style="margin-bottom: 1.5rem; font-size: 0.95rem;">Avoiding "Connection Pool Timeout" errors and balancing thread counts across your web and worker nodes.</p>
-                        <a href="#" class="btn btn-outline" style="font-size: 0.8rem;">READ_DOCS</a>
+                        <a href="#" class="btn btn-outline blog-hero-btn" style="font-size: 0.8rem;">READ_DOCS</a>
                     </article>
 
                 </div>
@@ -120,7 +145,7 @@
                     <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Bite-Sized <span class="text-gradient">Optimization Tips</span></h2>
                     <p class="text-secondary">Quick technical fixes for common performance bottlenecks.</p>
                 </div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                <div class="tips-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
                     <div class="glass-card" style="padding: 1.5rem; border-left: 3px solid var(--accent);">
                         <div class="mono" style="font-size: 0.7rem; color: var(--accent); margin-bottom: 0.5rem;">TIP_01 // JEMALLOC</div>
                         <h4 style="margin-bottom: 0.5rem;">RAM_REDUCTION</h4>
@@ -131,7 +156,7 @@
                         <h4 style="margin-bottom: 1rem;">POOLED_CONNS</h4>
                         <p class="text-secondary" style="font-size: 0.85rem;">Ensure your Redis connection pool size matches your Sidekiq concurrency + 2 for headroom.</p>
                     </div>
-                    <div class="glass-card" style="padding: 1.5rem; border-left: 3px solid var(--accent);">
+                    <div class="glass-card tips-card-third" style="padding: 1.5rem; border-left: 3px solid var(--accent);">
                         <div class="mono" style="font-size: 0.7rem; color: var(--accent); margin-bottom: 0.5rem;">TIP_03 // PAYLOADS</div>
                         <h4 style="margin-bottom: 1rem;">LIGHT_ARGS</h4>
                         <p class="text-secondary" style="font-size: 0.85rem;">Pass IDs instead of full objects to keep your Redis memory small and your jobs fast.</p>
@@ -250,6 +275,7 @@
     <script src="assets/js/main.js"></script>
 </body>
 </html>
+
 
 
 

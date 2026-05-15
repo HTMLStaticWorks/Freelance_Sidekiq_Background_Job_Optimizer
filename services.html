@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services | SidePulse Optimization</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -16,11 +17,37 @@
             gap: 6rem;
             align-items: center;
         }
+        .services-hero-wrap {
+            max-width: 800px;
+        }
         @media (max-width: 1024px) {
             .responsive-grid-2 {
                 grid-template-columns: 1fr;
                 gap: 3rem;
                 text-align: center;
+            }
+        }
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .services-menu-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            }
+            .services-menu-third {
+                grid-column: 1 / -1;
+                justify-self: center;
+                max-width: 420px;
+                width: 100%;
+            }
+        }
+        @media (max-width: 640px) {
+            .services-hero-wrap {
+                text-align: center;
+            }
+            .services-hero-title {
+                font-size: 2.6rem !important;
+                line-height: 1.15;
+            }
+            .services-hero-copy {
+                font-size: 1.1rem !important;
             }
         }
     </style>
@@ -59,16 +86,16 @@
     <main>
         <section style="padding-top: 160px; padding-bottom: 60px;">
             <div class="container">
-                <div style="max-width: 800px;">
-                    <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem;">Infrastructure <span class="text-gradient">Optimization Services</span></h1>
-                    <p class="text-secondary" style="font-size: 1.25rem;">We specialize in the deep technical layers of Ruby on Rails background processing. From Redis tuning to Ruby memory management, we make your jobs faster and more reliable.</p>
+                <div class="services-hero-wrap">
+                    <h1 class="services-hero-title" style="font-size: 3.5rem; margin-bottom: 1.5rem;">Infrastructure <span class="text-gradient">Optimization Services</span></h1>
+                    <p class="text-secondary services-hero-copy" style="font-size: 1.25rem;">We specialize in the deep technical layers of Ruby on Rails background processing. From Redis tuning to Ruby memory management, we make your jobs faster and more reliable.</p>
                 </div>
             </div>
         </section>
 
         <section>
             <div class="container">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem;">
+                <div class="services-menu-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem;">
                     
                     <div class="service-detail">
                         <div style="width: 60px; height: 60px; background: rgba(14, 165, 233, 0.1); border-radius: 1rem; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
@@ -96,7 +123,7 @@
                         </ul>
                     </div>
 
-                    <div class="service-detail">
+                    <div class="service-detail services-menu-third">
                         <div style="width: 60px; height: 60px; background: rgba(14, 165, 233, 0.1); border-radius: 1rem; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
                             <i class="fa-solid fa-bug-slash" style="color: var(--accent); font-size: 1.5rem;"></i>
                         </div>
@@ -293,6 +320,7 @@
     <script src="assets/js/main.js"></script>
 </body>
 </html>
+
 
 
 

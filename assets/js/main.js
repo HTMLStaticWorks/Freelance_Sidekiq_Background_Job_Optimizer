@@ -58,11 +58,30 @@ if (rtlToggle) {
 
 // Theme Toggle
 const themeToggle = document.getElementById('themeToggle');
+const THEME_STORAGE_KEY = 'sidepulse-theme';
+
+function applyTheme(isLight) {
+    document.body.classList.toggle('light-theme', isLight);
+    if (themeToggle) {
+        themeToggle.innerHTML = isLight ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+    }
+}
+
+try {
+    const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+    applyTheme(savedTheme === 'light');
+} catch (e) {
+    applyTheme(document.body.classList.contains('light-theme'));
+}
+
 if (themeToggle) {
     themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('light-theme');
         const isLight = document.body.classList.contains('light-theme');
-        themeToggle.innerHTML = isLight ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+        const nextIsLight = !isLight;
+        applyTheme(nextIsLight);
+        try {
+            localStorage.setItem(THEME_STORAGE_KEY, nextIsLight ? 'light' : 'dark');
+        } catch (e) {}
     });
 }
 

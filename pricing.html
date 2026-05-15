@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pricing | SidePulse Plans</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -29,6 +30,51 @@
             .enterprise-grid {
                 grid-template-columns: 1fr !important;
             }
+        }
+
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .pricing-plan-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            }
+            .pricing-plan-grid > .glass-card {
+                display: flex;
+                flex-direction: column;
+            }
+            .pricing-plan-grid > .glass-card .btn {
+                margin-top: auto;
+            }
+            .pricing-plan-third {
+                grid-column: 1 / -1;
+                justify-self: center;
+                max-width: 420px;
+                width: 100%;
+            }
+        }
+
+        .pricing-faq-item summary {
+            list-style: none;
+            cursor: pointer;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .pricing-faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+        .pricing-faq-item summary::after {
+            content: '+';
+            color: var(--accent);
+            font-size: 1.25rem;
+            line-height: 1;
+            font-weight: 700;
+        }
+        .pricing-faq-item[open] summary::after {
+            content: '-';
+        }
+        .pricing-faq-item p {
+            margin-top: 1rem;
         }
     </style>
 </head>
@@ -71,7 +117,7 @@
                     <p class="text-secondary" style="max-width: 600px; margin: 0 auto; font-size: 1.25rem;">Choose the level of engagement that fits your engineering team's needs.</p>
                 </div>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                <div class="pricing-plan-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
                     
                     <!-- Basic -->
                     <div class="glass-card">
@@ -107,7 +153,7 @@
                     </div>
 
                     <!-- Enterprise -->
-                    <div class="glass-card">
+                    <div class="glass-card pricing-plan-third">
                         <h3 style="margin-bottom: 0.5rem;">Dedicated Consultant</h3>
                         <p class="text-secondary" style="font-size: 0.9rem; margin-bottom: 1.5rem;">Ongoing performance partnership.</p>
                         <div style="font-size: 3rem; font-weight: 700; margin-bottom: 1.5rem;">$2,499<span style="font-size: 1rem; color: var(--text-secondary); font-weight: 400;">/mo</span></div>
@@ -119,6 +165,10 @@
                             <li><i class="fa-solid fa-check" style="color: var(--success); margin-right: 10px;"></i> Custom tooling dev</li>
                             <li><i class="fa-solid fa-check" style="color: var(--success); margin-right: 10px;"></i> Slack/Teams access</li>
                         </ul>
+                        <a href="contact.html" class="btn btn-outline" style="width: 100%;">Contact Sales</a>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Unique Section 1: Infrastructure ROI Estimator -->
@@ -205,19 +255,19 @@
             <div class="container">
                 <div style="max-width: 800px; margin: 0 auto;">
                     <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 4rem;">Technical <span class="text-gradient">FAQ</span></h2>
-                    <div style="display: flex; flex-direction: column; gap: 2rem;">
-                        <div class="glass-card" style="background: rgba(255,255,255,0.02);">
-                            <h4 style="margin-bottom: 1rem;">Do you require Sidekiq Pro or Enterprise?</h4>
+                                        <div style="display: flex; flex-direction: column; gap: 2rem;">
+                        <details class="glass-card pricing-faq-item" style="background: rgba(255,255,255,0.02);">
+                            <summary>Do you require Sidekiq Pro or Enterprise?</summary>
                             <p class="text-secondary">No, but we can help you decide if they are worth the investment. Many performance bottlenecks can be solved with OSS Sidekiq using custom aggregation and sharding strategies.</p>
-                        </div>
-                        <div class="glass-card" style="background: rgba(255,255,255,0.02);">
-                            <h4 style="margin-bottom: 1rem;">How do you handle sensitive data?</h4>
-                            <p class="text-secondary">We focus on infrastructure metrics and code patterns. We never need access to your actual job payload data—only performance profiles, Redis RDB stats, and source code for workers.</p>
-                        </div>
-                        <div class="glass-card" style="background: rgba(255,255,255,0.02);">
-                            <h4 style="margin-bottom: 1rem;">What cloud providers do you support?</h4>
+                        </details>
+                        <details class="glass-card pricing-faq-item" style="background: rgba(255,255,255,0.02);">
+                            <summary>How do you handle sensitive data?</summary>
+                            <p class="text-secondary">We focus on infrastructure metrics and code patterns. We never need access to your actual job payload data; only performance profiles, Redis RDB stats, and source code for workers.</p>
+                        </details>
+                        <details class="glass-card pricing-faq-item" style="background: rgba(255,255,255,0.02);">
+                            <summary>What cloud providers do you support?</summary>
                             <p class="text-secondary">We have extensive experience with AWS (Elasticache), Heroku, Fly.io, and self-hosted Kubernetes/Docker setups.</p>
-                        </div>
+                        </details>
                     </div>
                 </div>
             </div>
@@ -280,6 +330,10 @@
     <script src="assets/js/main.js"></script>
 </body>
 </html>
+
+
+
+
 
 
 

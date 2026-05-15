@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SidePulse | High-End Sidekiq & Redis Optimization</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <meta name="description" content="Optimize your Ruby on Rails background job infrastructure. SidePulse provides premium Sidekiq optimization, latency reduction, and queue performance tuning.">
     
     <!-- Fonts -->
@@ -111,7 +112,7 @@
                     <p class="text-secondary" style="max-width: 600px; margin: 0 auto;">We go deep into your Rails background infrastructure to find bottlenecks that generic monitoring tools miss.</p>
                 </div>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="home-features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
                     <div class="glass-card">
                         <i class="fa-solid fa-gauge-high" style="font-size: 2rem; color: var(--accent); margin-bottom: 1.5rem;"></i>
                         <h3>Queue Latency Monitor</h3>
@@ -122,10 +123,43 @@
                         <h3>Worker Memory Analytics</h3>
                         <p class="text-secondary">Stop Ruby memory leaks at the source. We analyze RSS growth per job type and optimize concurrency for your RAM constraints.</p>
                     </div>
-                    <div class="glass-card">
+                    <div class="glass-card home-feature-card-third">
                         <i class="fa-solid fa-rotate" style="font-size: 2rem; color: var(--accent); margin-bottom: 1.5rem;"></i>
                         <h3>Retry Analytics Engine</h3>
                         <p class="text-secondary">Identify failure patterns. We group retries by error type and frequency to automate dead-job recovery workflows.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Optimization Flywheel Section -->
+        <section style="padding-top: 2rem;">
+            <div class="container">
+                <div class="glass-card" style="padding: 2.5rem; border-color: rgba(34, 211, 238, 0.25); background: linear-gradient(135deg, rgba(14,165,233,0.08) 0%, rgba(34,211,238,0.03) 55%, rgba(17,24,39,0.7) 100%);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
+                        <div>
+                            <p class="mono" style="font-size: 0.75rem; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 0.5rem;">// OPTIMIZATION_FLYWHEEL</p>
+                            <h2 style="font-size: 2rem; margin: 0;">How We Compound Performance Gains</h2>
+                        </div>
+                        <span class="mono" style="font-size: 0.75rem; color: var(--success); border: 1px solid rgba(16,185,129,0.35); padding: 0.4rem 0.8rem; border-radius: 999px;">CYCLE_TIME: 14 DAYS</span>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+                        <div style="padding: 1.25rem; border: 1px solid var(--glass-border); border-radius: 1rem; background: rgba(255,255,255,0.02);">
+                            <p class="mono" style="font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 0.5rem;">STEP_01</p>
+                            <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Trace Queue Pressure</h3>
+                            <p class="text-secondary" style="font-size: 0.95rem;">Capture latency spikes per queue and map saturation windows by traffic profile.</p>
+                        </div>
+                        <div style="padding: 1.25rem; border: 1px solid var(--glass-border); border-radius: 1rem; background: rgba(255,255,255,0.02);">
+                            <p class="mono" style="font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 0.5rem;">STEP_02</p>
+                            <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Tune Worker Topology</h3>
+                            <p class="text-secondary" style="font-size: 0.95rem;">Rebalance concurrency, queue weights, and memory caps for predictable throughput.</p>
+                        </div>
+                        <div style="padding: 1.25rem; border: 1px solid var(--glass-border); border-radius: 1rem; background: rgba(255,255,255,0.02);">
+                            <p class="mono" style="font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 0.5rem;">STEP_03</p>
+                            <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Lock in Guardrails</h3>
+                            <p class="text-secondary" style="font-size: 0.95rem;">Ship alerts and restart thresholds so improvements persist as load changes.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -135,12 +169,12 @@
         <section style="background: linear-gradient(180deg, var(--background) 0%, var(--surface) 100%);">
             <div class="container">
                 <div class="glass-card" style="padding: 0; overflow: hidden; border-color: rgba(34, 211, 238, 0.2);">
-                    <div style="padding: 2rem; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center;">
+                    <div class="home-dashboard-preview-header" style="padding: 2rem; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center;">
                         <div>
                             <h2 style="font-size: 1.5rem; margin-bottom: 0.25rem;">Live Optimization Dashboard</h2>
                             <p class="text-secondary mono" style="font-size: 0.85rem;">STATUS: <span style="color: var(--success);">OPTIMIZED</span> // CLUSTER: US-EAST-1</p>
                         </div>
-                        <a href="dashboard.html" class="btn btn-primary">Enter Dashboard</a>
+                        <a href="dashboard.html" class="btn btn-primary home-dashboard-preview-btn">Enter Dashboard</a>
                     </div>
                     <div style="padding: 2rem; background: rgba(0,0,0,0.2);">
                         <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
@@ -258,6 +292,7 @@
     <script src="assets/js/charts.js"></script>
 </body>
 </html>
+
 
 
 

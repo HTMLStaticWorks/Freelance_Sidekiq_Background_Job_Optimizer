@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SidePulse | High-Performance Sidekiq Infrastructure</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -102,6 +103,16 @@
             #roiChart {
                 max-width: 100%;
                 height: auto !important;
+            }
+
+            .home2-final-cta-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .home2-final-cta-actions .btn {
+                width: 100%;
+                max-width: 260px;
             }
         }
     </style>
@@ -282,7 +293,7 @@
         <section style="background: var(--gradient-dark);">
             <div class="container" style="text-align: center;">
                 <h2 style="font-size: 3rem; margin-bottom: 2rem;">Ready to <span class="text-gradient">Scale Nominally?</span></h2>
-                <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 4rem;">
+                <div class="home2-final-cta-actions" style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 4rem;">
                     <a href="contact.html" class="btn btn-primary btn-lg">Book Optimization Sprint</a>
                     <a href="pricing.html" class="btn btn-outline btn-lg">View Pricing Tiers</a>
                 </div>
@@ -396,6 +407,7 @@
     <script src="assets/js/main.js"></script>
 </body>
 </html>
+
 
 
 
