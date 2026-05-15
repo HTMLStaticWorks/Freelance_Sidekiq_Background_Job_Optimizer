@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing | SidePulse Plans</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .responsive-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        @media (max-width: 1024px) {
+            .responsive-grid-2 {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+            .roi-stats-grid {
+                grid-template-columns: 1fr !important;
+            }
+            .enterprise-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header" class="scrolled">
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fa-solid fa-bolt-lightning"></i> Side<span>Pulse</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="home-2.html">Home 2</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="case-studies.html">Case Studies</a></li>
+                    <li><a href="pricing.html" class="active">Pricing</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="dashboard.html" class="btn btn-outline" style="padding: 0.4rem 1rem; font-size: 0.85rem; margin-left: 0.5rem;"><i class="fa-solid fa-chart-line"></i></a></li>
+                    <li class="header-actions-mobile" style="display: none; margin-top: 1rem;"><a href="login.html" class="btn btn-primary" style="width: 100%;" orientation="vertical">Login</a></li>
+                </ul>
+                <div class="header-actions">
+                    <button id="rtlToggle" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem;">RTL</button>
+                    <button id="themeToggle" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i class="fa-solid fa-moon"></i></button>
+                    <a href="login.html" class="btn btn-primary" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">Login</a>
+                    
+                </div>
+                <div id="mobileMenuToggle" class="mobile-menu-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section style="padding-top: 160px; padding-bottom: 60px;">
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 4rem;">
+                    <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem;">Transparent <span class="text-gradient">Optimization Pricing</span></h1>
+                    <p class="text-secondary" style="max-width: 600px; margin: 0 auto; font-size: 1.25rem;">Choose the level of engagement that fits your engineering team's needs.</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                    
+                    <!-- Basic -->
+                    <div class="glass-card">
+                        <h3 style="margin-bottom: 0.5rem;">Queue Audit</h3>
+                        <p class="text-secondary" style="font-size: 0.9rem; margin-bottom: 1.5rem;">Deep diagnostics of your current setup.</p>
+                        <div style="font-size: 3rem; font-weight: 700; margin-bottom: 1.5rem;">$1,499<span style="font-size: 1rem; color: var(--text-secondary); font-weight: 400;">/one-time</span></div>
+                        <ul style="list-style: none; color: var(--text-secondary); margin-bottom: 2rem; display: flex; flex-direction: column; gap: 1rem;">
+                            <li><i class="fa-solid fa-check" style="color: var(--success); margin-right: 10px;"></i> Infrastructure diagnostics</li>
+                            <li><i class="fa-solid fa-check" style="color: var(--success); margin-right: 10px;"></i> Redis latency report</li>
+                            <li><i class="fa-solid fa-check" style="color: var(--success); margin-right: 10px;"></i> Memory leak identification</li>
+                            <li><i class="fa-solid fa-check" style="color: var(--success); margin-right: 10px;"></i> Performance roadmap</li>
+                            <li style="opacity: 0.3;"><i class="fa-solid fa-xmark" style="margin-right: 10px;"></i> Code-level fixes</li>
+                            <li style="opacity: 0.3;"><i class="fa-solid fa-xmark" style="margin-right: 10px;"></i> Ongoing monitoring</li>
+                        </ul>
+                        <a href="contact.html" class="btn btn-outline" style="width: 100%;">Get Audit</a>
+                    </div>
+
+                    <!-- Pro -->
+                    <div class="glass-card pro-card" style="border-color: var(--accent); position: relative;">
+                        <div style="position: absolute; top: -15px; right: 20px; background: var(--accent); color: var(--primary); padding: 2px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 800;">MOST POPULAR</div>
+                        <h3 style="margin-bottom: 0.5rem;">Optimization Sprint</h3>
+                        <p class="text-secondary" style="font-size: 0.9rem; margin-bottom: 1.5rem;">Hands-on engineering for 2 weeks.</p>
+                        <div style="font-size: 3rem; font-weight: 700; margin-bottom: 1.5rem;">$4,999<span style="font-size: 1rem; color: var(--text-secondary); font-weight: 400;">/sprint</span></div>
+                        <ul style="list-style: none; color: var(--text-secondary); margin-bottom: 2rem; display: flex; flex-direction: column; gap: 1rem;">
+                            <li><i class="fa-solid fa-check" style="color: var(--success); margin-right: 10px;"></i> All Audit features</li>
+                            <li><i class="fa-solid fa-check" style="color: var(--success); margin-right: 10px;"></i> Direct PRs for optimization</li>
+                            <li><i class="fa-solid fa-check" style="color: var(--success); margin-right: 10px;"></i> jemalloc & GVL tuning</li>
+                            <li><i class="fa-solid fa-check" style="color: var(--success); margin-right: 10px;"></i> Dashboard integration</li>
+                            <li><i class="fa-solid fa-check" style="color: var(--success); margin-right: 10px;"></i> Team training session</li>
+                            <li style="opacity: 0.3;"><i class="fa-solid fa-xmark" style="margin-right: 10px;"></i> Incident response</li>
+                        </ul>
+                        <a href="contact.html" class="btn btn-primary" style="width: 100%;">Book Sprint</a>
+                    </div>
+
+                    <!-- Enterprise -->
+                    <div class="glass-card">
+                        <h3 style="margin-bottom: 0.5rem;">Dedicated Consultant</h3>
+                        <p class="text-secondary" style="font-size: 0.9rem; margin-bottom: 1.5rem;">Ongoing performance partnership.</p>
+                        <div style="font-size: 3rem; font-weight: 700; margin-bottom: 1.5rem;">$2,499<span style="font-size: 1rem; color: var(--text-secondary); font-weight: 400;">/mo</span></div>
+                        <ul style="list-style: none; color: var(--text-secondary); margin-bottom: 2rem; display: flex; flex-direction: column; gap: 1rem;">
+                            <li><i class="fa-solid fa-check" style="color: var(--success); margin-right: 10px;"></i> Continuous optimization</li>
+                            <li><i class="fa-solid fa-check" style="color: var(--success); margin-right: 10px;"></i> Priority incident response</li>
+                            <li><i class="fa-solid fa-check" style="color: var(--success); margin-right: 10px;"></i> Monthly performance reports</li>
+                            <li><i class="fa-solid fa-check" style="color: var(--success); margin-right: 10px;"></i> Scale-up planning</li>
+                            <li><i class="fa-solid fa-check" style="color: var(--success); margin-right: 10px;"></i> Custom tooling dev</li>
+                            <li><i class="fa-solid fa-check" style="color: var(--success); margin-right: 10px;"></i> Slack/Teams access</li>
+                        </ul>
+        </section>
+
+        <!-- Unique Section 1: Infrastructure ROI Estimator -->
+        <section style="background: var(--gradient-dark); padding: 6rem 0;">
+            <div class="container">
+                <div class="responsive-grid-2">
+                    <div>
+                        <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Infrastructure <span class="text-gradient">ROI Estimator</span></h2>
+                        <p class="text-secondary" style="margin-bottom: 2rem;">Our optimization typically reduces cloud costs by 35-60%. Calculate the impact of a SidePulse engagement on your bottom line.</p>
+                        
+                        <div class="glass-card" style="padding: 2rem; border-color: var(--accent);">
+                            <div style="margin-bottom: 2rem;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;" class="mono">
+                                    <span style="font-size: 0.8rem;">WORKER_NODES</span>
+                                    <span style="color: var(--accent);">50</span>
+                                </div>
+                                <div style="height: 4px; background: rgba(255,255,255,0.05); border-radius: 2px;">
+                                    <div style="height: 100%; width: 50%; background: var(--accent); border-radius: 2px;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;" class="mono">
+                                    <span style="font-size: 0.8rem;">AVG_LATENCY_MS</span>
+                                    <span style="color: var(--error);">850ms</span>
+                                </div>
+                                <div style="height: 4px; background: rgba(255,255,255,0.05); border-radius: 2px;">
+                                    <div style="height: 100%; width: 85%; background: var(--error); border-radius: 2px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="roi-stats-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                        <div class="glass-card" style="text-align: center; padding: 2rem;">
+                            <div class="mono" style="color: var(--success); font-size: 2rem; font-weight: 800;">$5.2k</div>
+                            <div class="text-secondary mono" style="font-size: 0.7rem;">EST_MONTHLY_SAVINGS</div>
+                        </div>
+                        <div class="glass-card" style="text-align: center; padding: 2rem;">
+                            <div class="mono" style="color: var(--accent); font-size: 2rem; font-weight: 800;">-72%</div>
+                            <div class="text-secondary mono" style="font-size: 0.7rem;">REDIS_CPU_LOAD</div>
+                        </div>
+                        <div class="glass-card" style="text-align: center; padding: 2rem;">
+                            <div class="mono" style="color: var(--success); font-size: 2rem; font-weight: 800;">4.1x</div>
+                            <div class="text-secondary mono" style="font-size: 0.7rem;">ROI_MULTIPLIER</div>
+                        </div>
+                        <div class="glass-card" style="text-align: center; padding: 2rem;">
+                            <div class="mono" style="color: var(--accent); font-size: 2rem; font-weight: 800;">Zero</div>
+                            <div class="text-secondary mono" style="font-size: 0.7rem;">DATA_LOSS_INCIDENTS</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Unique Section 2: Enterprise Readiness -->
+        <section style="padding: 6rem 0;">
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 4rem;">
+                    <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Enterprise <span class="text-gradient">Readiness</span></h2>
+                    <p class="text-secondary">We meet the strictest standards for security, compliance, and high-availability.</p>
+                </div>
+
+                <div class="enterprise-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+                    <div class="glass-card" style="padding: 2.5rem;">
+                        <i class="fa-solid fa-shield-halved" style="font-size: 2rem; color: var(--accent); margin-bottom: 1.5rem;"></i>
+                        <h4 style="margin-bottom: 1rem;">Zero-Trust Access</h4>
+                        <p class="text-secondary" style="font-size: 0.9rem;">We operate via temporary VPC peering or limited IAM roles. No permanent SSH keys or database credentials needed.</p>
+                    </div>
+                    <div class="glass-card" style="padding: 2.5rem;">
+                        <i class="fa-solid fa-infinity" style="font-size: 2rem; color: var(--accent); margin-bottom: 1.5rem;"></i>
+                        <h4 style="margin-bottom: 1rem;">99.99% SLO Focused</h4>
+                        <p class="text-secondary" style="font-size: 0.9rem;">Our optimizations are architected for Multi-AZ Redis clusters and failover resilience as a first-class citizen.</p>
+                    </div>
+                    <div class="glass-card" style="padding: 2.5rem;">
+                        <i class="fa-solid fa-file-contract" style="font-size: 2rem; color: var(--accent); margin-bottom: 1.5rem;"></i>
+                        <h4 style="margin-bottom: 1rem;">Compliant Audit Logs</h4>
+                        <p class="text-secondary" style="font-size: 0.9rem;">Every infrastructure change is documented in version control with full audit trails for SOC2/HIPAA compliance.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section style="background: var(--surface);">
+            <div class="container">
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 4rem;">Technical <span class="text-gradient">FAQ</span></h2>
+                    <div style="display: flex; flex-direction: column; gap: 2rem;">
+                        <div class="glass-card" style="background: rgba(255,255,255,0.02);">
+                            <h4 style="margin-bottom: 1rem;">Do you require Sidekiq Pro or Enterprise?</h4>
+                            <p class="text-secondary">No, but we can help you decide if they are worth the investment. Many performance bottlenecks can be solved with OSS Sidekiq using custom aggregation and sharding strategies.</p>
+                        </div>
+                        <div class="glass-card" style="background: rgba(255,255,255,0.02);">
+                            <h4 style="margin-bottom: 1rem;">How do you handle sensitive data?</h4>
+                            <p class="text-secondary">We focus on infrastructure metrics and code patterns. We never need access to your actual job payload data—only performance profiles, Redis RDB stats, and source code for workers.</p>
+                        </div>
+                        <div class="glass-card" style="background: rgba(255,255,255,0.02);">
+                            <h4 style="margin-bottom: 1rem;">What cloud providers do you support?</h4>
+                            <p class="text-secondary">We have extensive experience with AWS (Elasticache), Heroku, Fly.io, and self-hosted Kubernetes/Docker setups.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+        <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Column 1: Brand -->
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <i class="fa-solid fa-bolt-lightning"></i> Side<span>Pulse</span>
+                    </a>
+                    <p style="margin-top: 1rem; margin-bottom: 2rem;">High-end Ruby on Rails background job optimization and infrastructure tuning for scaling SaaS teams.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Services -->
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Queue Performance</a></li>
+                        <li><a href="services.html">Memory Optimization</a></li>
+                        <li><a href="services.html">Dead Job Recovery</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Quick Links -->
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="case-studies.html">Case Studies</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Newsletter -->
+                <div class="footer-column">
+                    <h4>Stay Updated</h4>
+                    <p class="text-secondary" style="font-size: 0.95rem; margin-bottom: 1rem;">Join our newsletter for infrastructure inspiration and optimization tips.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email" required>
+                        <button type="submit">Join</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 SidePulse Labs. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
+
+
+
+

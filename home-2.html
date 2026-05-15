@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SidePulse | High-Performance Sidekiq Infrastructure</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .terminal-window {
+            background: #0d1117;
+            border: 1px solid var(--glass-border);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .terminal-header {
+            background: #161b22;
+            padding: 0.75rem 1rem;
+            display: flex;
+            gap: 6px;
+        }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot-red { background: #ff5f56; }
+        .dot-yellow { background: #ffbd2e; }
+        .dot-green { background: #27c93f; }
+        .terminal-body { padding: 1.5rem; color: #d1d5db; font-size: 0.85rem; line-height: 1.6; }
+        .typed-text { color: var(--accent); }
+        
+        .process-step { position: relative; padding-left: 3rem; }
+        .process-step::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--glass-border);
+        }
+        .step-num {
+            position: absolute;
+            left: -12px;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background: var(--accent);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.7rem;
+        }
+
+        .infra-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 10px;
+        }
+        .infra-node {
+            aspect-ratio: 1;
+            background: rgba(14, 165, 233, 0.1);
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .infra-node.active {
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        .responsive-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .roi-card {
+            padding: 4rem;
+            border-color: var(--accent);
+        }
+
+        @media (max-width: 1024px) {
+            .responsive-grid-2 {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+            .hero h1 { font-size: 3rem !important; }
+        }
+
+        @media (max-width: 640px) {
+            .roi-card {
+                padding: 2rem 1.5rem;
+            }
+            #roiChart {
+                max-width: 100%;
+                height: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header" class="scrolled">
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fa-solid fa-bolt-lightning"></i> Side<span>Pulse</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="home-2.html" class="active">Home 2</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="case-studies.html">Case Studies</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="dashboard.html" class="btn btn-outline" style="padding: 0.4rem 1rem; font-size: 0.85rem; margin-left: 0.5rem;"><i class="fa-solid fa-chart-line"></i></a></li>
+                    <li class="header-actions-mobile" style="display: none; margin-top: 1rem;"><a href="login.html" class="btn btn-primary" style="width: 100%;" orientation="vertical">Login</a></li>
+                </ul>
+                <div class="header-actions">
+                    <button id="rtlToggle" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem;">RTL</button>
+                    <button id="themeToggle" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i class="fa-solid fa-moon"></i></button>
+                    <a href="login.html" class="btn btn-primary" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">Login</a>
+                    
+                </div>
+                <div id="mobileMenuToggle" class="mobile-menu-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. HERO V2: Centered Impact -->
+        <section class="hero" style="text-align: center; justify-content: center; padding-top: 200px;">
+            <div class="container" style="display: block;">
+                <div style="max-width: 900px; margin: 0 auto;">
+                    <div class="mono" style="color: var(--accent); font-size: 0.9rem; margin-bottom: 1.5rem; letter-spacing: 0.3em;">ENGINEERING_FOR_SCALE</div>
+                    <h1 style="font-size: 4.5rem; line-height: 1.1; margin-bottom: 2rem;">Background Infrastructure <br><span class="text-gradient">Redefined for Ruby</span></h1>
+                    <p class="text-secondary" style="font-size: 1.25rem; max-width: 700px; margin: 0 auto 3rem;">We help Series A & B startups scale their Sidekiq clusters to millions of jobs without breaking the bank or Redis.</p>
+                    
+                    <div class="terminal-window" style="max-width: 600px; margin: 0 auto; text-align: left;">
+                        <div class="terminal-header">
+                            <div class="dot dot-red"></div>
+                            <div class="dot dot-yellow"></div>
+                            <div class="dot dot-green"></div>
+                            <span style="color: #6e7681; font-size: 0.7rem; margin-left: 10px;">sidepulse --analyze --cluster=prod</span>
+                        </div>
+                        <div class="terminal-body">
+                            <div><span class="typed-text">$</span> sidepulse scan --target=redis-01</div>
+                            <div style="color: #8b949e;">[INFO] Analyzing memory fragmentation...</div>
+                            <div style="color: #8b949e;">[INFO] Profiling RSS usage per worker...</div>
+                            <div style="color: var(--success);">[OK] Found 3 memory leaks in EmailWorker</div>
+                            <div style="color: var(--warning);">[WARN] Redis RDB persistence latency detected</div>
+                            <div><span class="typed-text">$</span> sidepulse optimize --apply</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. WORKFLOW: The Optimization Process -->
+        <section style="background: var(--surface);">
+            <div class="container">
+                <div class="responsive-grid-2">
+                    <div>
+                        <h2 style="font-size: 3rem; margin-bottom: 2rem;">How We <span class="text-gradient">Ship Performance</span></h2>
+                        <p class="text-secondary" style="margin-bottom: 3rem;">Our 3-stage optimization workflow is designed to minimize downtime and maximize throughput from day one.</p>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 2.5rem;">
+                            <div class="process-step">
+                                <div class="step-num">1</div>
+                                <h4>Deep Infrastructure Audit</h4>
+                                <p class="text-secondary">We profile your Redis RDB/AOF snapshots and worker RSS to identify invisible bottlenecks.</p>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-num">2</div>
+                                <h4>The Performance Sprint</h4>
+                                <p class="text-secondary">Hands-on code and config changes. jemalloc integration, GVL tuning, and queue sharding.</p>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-num">3</div>
+                                <h4>Continuous Monitoring</h4>
+                                <p class="text-secondary">Setup of custom Grafana dashboards and Datadog monitors tailored for Sidekiq internals.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-card" style="padding: 3rem; text-align: center; background: radial-gradient(circle at center, rgba(34, 211, 238, 0.05) 0%, transparent 70%);">
+                        <i class="fa-solid fa-microchip" style="font-size: 4rem; color: var(--accent); margin-bottom: 2rem;"></i>
+                        <h3 style="margin-bottom: 1rem;">System Health</h3>
+                        <div style="font-size: 3.5rem; font-weight: 800; color: var(--success);" class="mono">99.99%</div>
+                        <p class="text-secondary mono" style="font-size: 0.8rem;">JOB_SUCCESS_RATE_POST_AUDIT</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. INFRASTRUCTURE VISUALIZATION -->
+        <section>
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 4rem;">
+                    <h2 style="font-size: 2.5rem;">Distributed <span class="text-gradient">Worker Intelligence</span></h2>
+                    <p class="text-secondary">Visualizing a scaled Sidekiq cluster processing 12k jobs per second.</p>
+                </div>
+                
+                <div class="glass-card" style="padding: 2rem;">
+                    <div class="infra-grid" id="infraGrid">
+                        <!-- Generated by JS -->
+                    </div>
+                    <div style="margin-top: 2rem; display: flex; justify-content: space-between; align-items: center;">
+                        <div class="mono" style="font-size: 0.75rem; color: var(--text-secondary);">CLUSTER_NODES: 120 // STATUS: <span style="color: var(--success);">NOMINAL</span></div>
+                        <div style="display: flex; gap: 1rem;">
+                            <span class="mono" style="font-size: 0.75rem;"><span style="color: var(--accent);">●</span> ACTIVE</span>
+                            <span class="mono" style="font-size: 0.75rem;"><span style="color: rgba(255,255,255,0.1);">●</span> IDLE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. TECH STACK: The Performance Arsenal -->
+        <section style="background: var(--surface);">
+            <div class="container">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                    <div class="glass-card" style="padding: 1.5rem; text-align: center;">
+                        <i class="fa-brands fa-rust" style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent);"></i>
+                        <div class="mono" style="font-size: 0.8rem;">RUBY_RAILS</div>
+                    </div>
+                    <div class="glass-card" style="padding: 1.5rem; text-align: center;">
+                        <i class="fa-solid fa-database" style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent);"></i>
+                        <div class="mono" style="font-size: 0.8rem;">REDIS_STACK</div>
+                    </div>
+                    <div class="glass-card" style="padding: 1.5rem; text-align: center;">
+                        <i class="fa-brands fa-docker" style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent);"></i>
+                        <div class="mono" style="font-size: 0.8rem;">K8S_DEPLOY</div>
+                    </div>
+                    <div class="glass-card" style="padding: 1.5rem; text-align: center;">
+                        <i class="fa-solid fa-chart-area" style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent);"></i>
+                        <div class="mono" style="font-size: 0.8rem;">PROMETHEUS</div>
+                    </div>
+                    <div class="glass-card" style="padding: 1.5rem; text-align: center;">
+                        <i class="fa-solid fa-bolt" style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent);"></i>
+                        <div class="mono" style="font-size: 0.8rem;">JEMALLOC</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. ROI CALCULATOR (Visual) -->
+        <section>
+            <div class="container">
+                <div class="glass-card responsive-grid-2 roi-card">
+                    <div>
+                        <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Infrastructure <span class="text-gradient">Efficiency ROI</span></h2>
+                        <p class="text-secondary" style="margin-bottom: 2rem;">Stop over-provisioning worker nodes. Our tuning typically reduces RAM usage by 40%, allowing you to scale without increasing your cloud bill.</p>
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 0.5rem; border-left: 4px solid var(--accent);">
+                                <h4 class="mono" style="color: var(--accent);">$4,200/mo</h4>
+                                <p class="text-secondary" style="font-size: 0.8rem;">Estimated Savings for mid-size clusters</p>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 0.5rem; border-left: 4px solid var(--success);">
+                                <h4 class="mono" style="color: var(--success);">-820ms</h4>
+                                <p class="text-secondary" style="font-size: 0.8rem;">Average reduction in P99 job latency</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; width: 100%; max-width: 300px; margin: 0 auto; position: relative;">
+                        <canvas id="roiChart" width="300" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. FINAL CTA & FAQ -->
+        <section style="background: var(--gradient-dark);">
+            <div class="container" style="text-align: center;">
+                <h2 style="font-size: 3rem; margin-bottom: 2rem;">Ready to <span class="text-gradient">Scale Nominally?</span></h2>
+                <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 4rem;">
+                    <a href="contact.html" class="btn btn-primary btn-lg">Book Optimization Sprint</a>
+                    <a href="pricing.html" class="btn btn-outline btn-lg">View Pricing Tiers</a>
+                </div>
+                
+                <div style="max-width: 700px; margin: 0 auto; text-align: left;">
+                    <div style="border-bottom: 1px solid var(--glass-border); padding: 1.5rem 0;">
+                        <h4 style="margin-bottom: 0.5rem; color: var(--accent);">What is jemalloc and why do you use it?</h4>
+                        <p class="text-secondary" style="font-size: 0.9rem;">jemalloc is a general-purpose malloc implementation that emphasizes fragmentation avoidance. In Ruby environments, it can reduce memory usage by up to 30%.</p>
+                    </div>
+                    <div style="border-bottom: 1px solid var(--glass-border); padding: 1.5rem 0;">
+                        <h4 style="margin-bottom: 0.5rem; color: var(--accent);">Can you optimize ActiveJob?</h4>
+                        <p class="text-secondary" style="font-size: 0.9rem;">Yes, though for extreme throughput we often recommend migrating performance-critical jobs to the native Sidekiq API to reduce overhead.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+        <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Column 1: Brand -->
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <i class="fa-solid fa-bolt-lightning"></i> Side<span>Pulse</span>
+                    </a>
+                    <p style="margin-top: 1rem; margin-bottom: 2rem;">High-end Ruby on Rails background job optimization and infrastructure tuning for scaling SaaS teams.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Services -->
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Queue Performance</a></li>
+                        <li><a href="services.html">Memory Optimization</a></li>
+                        <li><a href="services.html">Dead Job Recovery</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Quick Links -->
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="case-studies.html">Case Studies</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Newsletter -->
+                <div class="footer-column">
+                    <h4>Stay Updated</h4>
+                    <p class="text-secondary" style="font-size: 0.95rem; margin-bottom: 1rem;">Join our newsletter for infrastructure inspiration and optimization tips.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email" required>
+                        <button type="submit">Join</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 SidePulse Labs. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Infra Grid Generation
+        const grid = document.getElementById('infraGrid');
+        for (let i = 0; i < 12 * 6; i++) {
+            const node = document.createElement('div');
+            node.className = 'infra-node';
+            if (Math.random() > 0.7) {
+                node.classList.add('active');
+                node.style.animationDelay = `${Math.random() * 2}s`;
+            }
+            grid.appendChild(node);
+        }
+
+        // Pulse effect
+        setInterval(() => {
+            const nodes = document.querySelectorAll('.infra-node');
+            const randomIdx = Math.floor(Math.random() * nodes.length);
+            nodes[randomIdx].classList.toggle('active');
+        }, 200);
+
+        // ROI Chart
+        const ctxRoi = document.getElementById('roiChart').getContext('2d');
+        new Chart(ctxRoi, {
+            type: 'doughnut',
+            data: {
+                labels: ['Optimized', 'Waste'],
+                datasets: [{
+                    data: [85, 15],
+                    backgroundColor: ['#22D3EE', 'rgba(255,255,255,0.05)'],
+                    borderWidth: 0,
+                    cutout: '80%'
+                }]
+            },
+            options: {
+                plugins: { legend: { display: false } }
+            }
+        });
+    </script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
+
+
+

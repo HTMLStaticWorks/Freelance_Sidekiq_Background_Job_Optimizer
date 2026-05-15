@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | SidePulse Analytics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { background: var(--background); }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+        }
+        aside {
+            background: var(--primary);
+            border-right: 1px solid var(--glass-border);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            transition: all 0.3s ease;
+            z-index: 1100;
+        }
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+        }
+        .nav-item.active {
+            background: rgba(14, 165, 233, 0.1);
+            color: var(--accent);
+        }
+        .main-content {
+            padding: 2rem;
+            overflow-y: auto;
+            background: var(--background);
+        }
+        .dash-card {
+            background: var(--surface);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .heat-map {
+            display: grid;
+            grid-template-columns: repeat(24, 1fr);
+            gap: 4px;
+        }
+        .heat-box {
+            aspect-ratio: 1;
+            border-radius: 2px;
+            background: rgba(14, 165, 233, 0.1);
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-primary);
+            margin-right: 1rem;
+        }
+
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            aside {
+                position: fixed;
+                left: -280px;
+                top: 0;
+                bottom: 0;
+                width: 280px;
+            }
+            aside.open {
+                left: 0;
+                box-shadow: 20px 0 50px rgba(0,0,0,0.5);
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .metric-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            .chart-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .chart-container {
+                height: 250px !important;
+            }
+        }
+        @media (max-width: 640px) {
+            .metric-grid {
+                grid-template-columns: 1fr;
+            }
+            .main-content {
+                padding: 1rem;
+            }
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start !important;
+                gap: 1rem;
+            }
+            .dashboard-header > div:last-child {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-grid">
+        <aside>
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-bolt-lightning"></i> Side<span>Pulse</span>
+            </a>
+            <div style="flex-grow: 1;">
+                <nav style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <a href="javascript:void(0)" class="nav-item active" data-section="analytics"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+                    <a href="javascript:void(0)" class="nav-item" data-section="queues"><i class="fa-solid fa-layer-group"></i> Queues</a>
+                    <a href="javascript:void(0)" class="nav-item" data-section="workers"><i class="fa-solid fa-robot"></i> Workers</a>
+                    <a href="javascript:void(0)" class="nav-item" data-section="dead-jobs"><i class="fa-solid fa-bug"></i> Dead Jobs</a>
+                    <a href="javascript:void(0)" class="nav-item" data-section="tuning"><i class="fa-solid fa-gear"></i> Tuning</a>
+                    <div style="margin: 1rem 0; border-top: 1px solid var(--glass-border);"></div>
+                    <a href="login.html" class="nav-item" style="color: var(--error);"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="dashboard-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--glass-border);">
+                <div style="display: flex; align-items: center;">
+                    <div id="menuToggle" class="menu-toggle">
+                        <i class="fa-solid fa-bars"></i>
+                    </div>
+                    <div>
+                        <h1 style="font-size: 1.5rem; margin-bottom: 0.25rem;">Welcome back,</h1>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <button id="rtlToggle" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem;">RTL</button>
+                    <button id="themeToggle" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i class="fa-solid fa-moon"></i></button>
+                    <div style="width: 40px; height: 40px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary); font-weight: 700; cursor: pointer; transition: all 0.2s; border: 2px solid transparent;" onmouseover="this.style.borderColor='var(--accent)'; this.style.boxShadow='0 0 10px var(--accent)'" onmouseout="this.style.borderColor='transparent'; this.style.boxShadow='none'">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- Analytics Section -->
+            <div id="section-analytics" class="dashboard-section active">
+                <div class="metric-grid" style="margin-top: 1rem;">
+                    <div class="dash-card">
+                        <p class="text-secondary mono" style="font-size: 0.75rem;">LATENCY</p>
+                        <h2 class="mono" style="color: var(--accent);">14ms</h2>
+                        <p class="mono" style="font-size: 0.7rem; color: var(--success);"><i class="fa-solid fa-arrow-down"></i> 12% vs last hr</p>
+                    </div>
+                    <div class="dash-card">
+                        <p class="text-secondary mono" style="font-size: 0.75rem;">THROUGHPUT</p>
+                        <h2 class="mono" style="color: var(--accent);">4,218 <span style="font-size: 0.9rem; font-weight: 400;">j/s</span></h2>
+                        <p class="mono" style="font-size: 0.7rem; color: var(--success);"><i class="fa-solid fa-arrow-up"></i> 5% vs last hr</p>
+                    </div>
+                    <div class="dash-card">
+                        <p class="text-secondary mono" style="font-size: 0.75rem;">FAILED_JOBS</p>
+                        <h2 class="mono" style="color: var(--error);">0.02%</h2>
+                        <p class="mono" style="font-size: 0.7rem; color: var(--text-secondary);">Stable</p>
+                    </div>
+                    <div class="dash-card">
+                        <p class="text-secondary mono" style="font-size: 0.75rem;">REDIS_MEMORY</p>
+                        <h2 class="mono" style="color: var(--warning);">4.2 GB</h2>
+                        <p class="mono" style="font-size: 0.7rem; color: var(--warning);">72% Capacity</p>
+                    </div>
+                </div>
+
+                <div class="chart-grid">
+                    <div class="dash-card">
+                        <h3 class="mono" style="font-size: 1rem; margin-bottom: 1.5rem;">EXECUTION_TRENDS (24H)</h3>
+                        <div class="chart-container" style="height: 300px;">
+                            <canvas id="trendsChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="dash-card">
+                        <h3 class="mono" style="font-size: 1rem; margin-bottom: 1.5rem;">WORKER_MEMORY_RSS</h3>
+                        <div class="chart-container" style="height: 300px;">
+                            <canvas id="memoryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dash-card">
+                    <h3 class="mono" style="font-size: 1rem; margin-bottom: 1.5rem;">JOB_EXECUTION_HEATMAP</h3>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <div class="heat-map" id="heatMapContainer"></div>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-secondary);" class="mono">
+                            <span>00:00</span>
+                            <span>06:00</span>
+                            <span>12:00</span>
+                            <span>18:00</span>
+                            <span>23:59</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Queues Section -->
+            <div id="section-queues" class="dashboard-section" style="display: none;">
+                <h1 style="font-size: 1.75rem; margin-bottom: 2rem;">Queue Management</h1>
+                <div class="dash-card" style="padding: 0; overflow: hidden;">
+                    <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                        <thead>
+                            <tr style="background: rgba(255,255,255,0.03);">
+                                <th style="padding: 1.25rem 1.5rem;" class="mono">QUEUE_NAME</th>
+                                <th style="padding: 1.25rem 1.5rem;" class="mono">ENQUEUED</th>
+                                <th style="padding: 1.25rem 1.5rem;" class="mono">LATENCY</th>
+                                <th style="padding: 1.25rem 1.5rem;" class="mono">STATUS</th>
+                            </tr>
+                        </thead>
+                        <tbody class="mono" style="font-size: 0.85rem;">
+                            <tr style="border-bottom: 1px solid var(--glass-border);">
+                                <td style="padding: 1.25rem 1.5rem;">default</td>
+                                <td style="padding: 1.25rem 1.5rem;">12,402</td>
+                                <td style="padding: 1.25rem 1.5rem;">4ms</td>
+                                <td style="padding: 1.25rem 1.5rem; color: var(--success);">ACTIVE</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--glass-border);">
+                                <td style="padding: 1.25rem 1.5rem;">critical</td>
+                                <td style="padding: 1.25rem 1.5rem;">0</td>
+                                <td style="padding: 1.25rem 1.5rem;">0ms</td>
+                                <td style="padding: 1.25rem 1.5rem; color: var(--success);">IDLE</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--glass-border);">
+                                <td style="padding: 1.25rem 1.5rem;">mailers</td>
+                                <td style="padding: 1.25rem 1.5rem;">4,201</td>
+                                <td style="padding: 1.25rem 1.5rem;">142ms</td>
+                                <td style="padding: 1.25rem 1.5rem; color: var(--warning);">BUSY</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Workers Section -->
+            <div id="section-workers" class="dashboard-section" style="display: none;">
+                <h1 style="font-size: 1.75rem; margin-bottom: 2rem;">Active Workers</h1>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                    <div class="dash-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h4 class="mono" style="color: var(--accent);">worker-node-01</h4>
+                            <span class="badge" style="background: rgba(34, 211, 238, 0.1); color: var(--accent); font-size: 0.7rem;">BUSY</span>
+                        </div>
+                        <p class="text-secondary mono" style="font-size: 0.8rem;">JOB: ProcessInvoiceWorker</p>
+                        <p class="text-secondary mono" style="font-size: 0.8rem;">MEM: 452MB</p>
+                    </div>
+                    <div class="dash-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h4 class="mono" style="color: var(--accent);">worker-node-02</h4>
+                            <span class="badge" style="background: rgba(16, 185, 129, 0.1); color: var(--success); font-size: 0.7rem;">IDLE</span>
+                        </div>
+                        <p class="text-secondary mono" style="font-size: 0.8rem;">JOB: Waiting...</p>
+                        <p class="text-secondary mono" style="font-size: 0.8rem;">MEM: 412MB</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dead Jobs Section -->
+            <div id="section-dead-jobs" class="dashboard-section" style="display: none;">
+                <h1 style="font-size: 1.75rem; margin-bottom: 2rem;">Dead Job Management</h1>
+                <div class="dash-card" style="text-align: center; padding: 4rem;">
+                    <i class="fa-solid fa-ghost" style="font-size: 3rem; color: var(--text-secondary); margin-bottom: 1.5rem;"></i>
+                    <h3 class="mono">No Dead Jobs Found</h3>
+                    <p class="text-secondary">System is healthy. All failed jobs successfully retried.</p>
+                </div>
+            </div>
+
+            <!-- Tuning Section -->
+            <div id="section-tuning" class="dashboard-section" style="display: none;">
+                <h1 style="font-size: 1.75rem; margin-bottom: 2rem;">System Tuning</h1>
+                <div class="glass-card" style="max-width: 600px;">
+                    <div style="margin-bottom: 2rem;">
+                        <label class="mono" style="display: block; margin-bottom: 1rem; color: var(--accent);">SIDEKIQ_CONCURRENCY</label>
+                        <input type="range" style="width: 100%; cursor: pointer;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem;" class="text-secondary mono">
+                            <span>5 Threads</span>
+                            <span>25 Threads</span>
+                            <span>50 Threads</span>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 2rem;">
+                        <label class="mono" style="display: block; margin-bottom: 1rem; color: var(--accent);">JEMALLOC_ENABLED</label>
+                        <button class="btn btn-primary btn-sm">SWITCH_TO_MALLOC</button>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;">APPLY_CHANGES</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Dashboard specific charts
+        const ctxTrends = document.getElementById('trendsChart');
+        new Chart(ctxTrends, {
+            type: 'line',
+            data: {
+                labels: Array.from({length: 24}, (_, i) => `${i}:00`),
+                datasets: [{
+                    label: 'Processed',
+                    data: [1200, 1100, 900, 850, 800, 950, 1500, 2800, 4200, 4500, 4300, 4100, 4200, 4400, 4600, 4800, 4500, 4200, 3800, 3200, 2800, 2400, 1800, 1400],
+                    borderColor: '#22D3EE',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    fill: true,
+                    backgroundColor: 'rgba(34, 211, 238, 0.05)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { grid: { display: false }, ticks: { color: '#94A3B8', font: { family: 'JetBrains Mono' } } },
+                    y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#94A3B8', font: { family: 'JetBrains Mono' } } }
+                }
+            }
+        });
+
+        const ctxMemory = document.getElementById('memoryChart');
+        new Chart(ctxMemory, {
+            type: 'bar',
+            data: {
+                labels: ['W1', 'W2', 'W3', 'W4', 'W5', 'W6'],
+                datasets: [{
+                    data: [450, 480, 520, 440, 610, 490],
+                    backgroundColor: 'rgba(14, 165, 233, 0.5)',
+                    borderColor: '#0EA5E9',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { grid: { display: false }, ticks: { color: '#94A3B8', font: { family: 'JetBrains Mono' } } },
+                    y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#94A3B8', font: { family: 'JetBrains Mono' } } }
+                }
+            }
+        });
+
+        // Heatmap generation
+        const heatMapContainer = document.getElementById('heatMapContainer');
+        if (heatMapContainer) {
+            for (let i = 0; i < 24 * 5; i++) {
+                const box = document.createElement('div');
+                box.className = 'heat-box';
+                const opacity = Math.random();
+                box.style.background = `rgba(34, 211, 238, ${opacity})`;
+                heatMapContainer.appendChild(box);
+            }
+        }
+
+        // Section Switching Logic
+        const navItems = document.querySelectorAll('.nav-item');
+        const sections = document.querySelectorAll('.dashboard-section');
+        const aside = document.querySelector('aside');
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const targetSection = item.getAttribute('data-section');
+                
+                // If it's the logout link, let the browser handle it
+                if (item.getAttribute('href') !== 'javascript:void(0)') return;
+
+                // Update nav items
+                navItems.forEach(nav => nav.classList.remove('active'));
+                item.classList.add('active');
+
+                // Update sections
+                sections.forEach(section => {
+                    if (section.id === `section-${targetSection}`) {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+
+                // Close sidebar on mobile after clicking
+                if (window.innerWidth <= 1024) {
+                    aside.classList.remove('open');
+                }
+            });
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                aside.classList.toggle('open');
+            });
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 1024 && aside.classList.contains('open')) {
+                if (!aside.contains(e.target) && !menuToggle.contains(e.target)) {
+                    aside.classList.remove('open');
+                }
+            }
+        });
+    </script>
+    <script src="assets/js/main.js"></script>
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Column 1: Brand -->
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <i class="fa-solid fa-bolt-lightning"></i> Side<span>Pulse</span>
+                    </a>
+                    <p style="margin-top: 1rem; margin-bottom: 2rem;">High-end Ruby on Rails background job optimization and infrastructure tuning for scaling SaaS teams.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Services -->
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Queue Performance</a></li>
+                        <li><a href="services.html">Memory Optimization</a></li>
+                        <li><a href="services.html">Dead Job Recovery</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Quick Links -->
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="case-studies.html">Case Studies</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Newsletter -->
+                <div class="footer-column">
+                    <h4>Stay Updated</h4>
+                    <p class="text-secondary" style="font-size: 0.95rem; margin-bottom: 1rem;">Join our newsletter for infrastructure inspiration and optimization tips.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email" required>
+                        <button type="submit">Join</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 SidePulse Labs. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Audit | SidePulse Optimization</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .form-group { margin-bottom: 1.5rem; }
+        .form-label { display: block; margin-bottom: 0.5rem; color: var(--text-secondary); font-size: 0.85rem; font-family: 'JetBrains Mono', monospace; }
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 0.5rem;
+            color: var(--text-primary);
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(34, 211, 238, 0.05);
+            box-shadow: 0 0 10px rgba(34, 211, 238, 0.1);
+        }
+        textarea.form-input { min-height: 120px; resize: vertical; }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+        @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <header id="header" class="scrolled">
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fa-solid fa-bolt-lightning"></i> Side<span>Pulse</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="home-2.html">Home 2</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="case-studies.html">Case Studies</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="dashboard.html" class="btn btn-outline" style="padding: 0.4rem 1rem; font-size: 0.85rem; margin-left: 0.5rem;"><i class="fa-solid fa-chart-line"></i></a></li>
+                    <li class="header-actions-mobile" style="display: none; margin-top: 1rem;"><a href="login.html" class="btn btn-primary" style="width: 100%;" orientation="vertical">Login</a></li>
+                </ul>
+                <div class="header-actions">
+                    <button id="rtlToggle" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem;">RTL</button>
+                    <button id="themeToggle" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i class="fa-solid fa-moon"></i></button>
+                    <a href="login.html" class="btn btn-primary" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">Login</a>
+                    
+                </div>
+                <div id="mobileMenuToggle" class="mobile-menu-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section style="padding-top: 160px; padding-bottom: 80px;">
+            <div class="container">
+                <div class="contact-grid">
+                    <div>
+                        <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem;">Let's Fix Your <span class="text-gradient">Infrastructure</span></h1>
+                        <p class="text-secondary" style="font-size: 1.1rem; margin-bottom: 3rem;">Ready to reduce latency and save on infrastructure costs? Fill out the form below and I'll get back to you with an initial diagnostic plan within 24 hours.</p>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 2rem;">
+                            <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                                <div style="color: var(--accent); font-size: 1.25rem;"><i class="fa-solid fa-envelope"></i></div>
+                                <div>
+                                    <h4 style="margin-bottom: 0.25rem;">Email Us</h4>
+                                    <p class="text-secondary mono" style="font-size: 0.9rem;">audit@sidepulse.io</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                                <div style="color: var(--accent); font-size: 1.25rem;"><i class="fa-brands fa-slack"></i></div>
+                                <div>
+                                    <h4 style="margin-bottom: 0.25rem;">Slack Community</h4>
+                                    <p class="text-secondary mono" style="font-size: 0.9rem;">#sidekiq-performance</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                                <div style="color: var(--accent); font-size: 1.25rem;"><i class="fa-solid fa-location-dot"></i></div>
+                                <div>
+                                    <h4 style="margin-bottom: 0.25rem;">Location</h4>
+                                    <p class="text-secondary mono" style="font-size: 0.9rem;">Remote // Worldwide</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card">
+                        <form id="auditForm">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label class="form-label">NAME</label>
+                                    <input type="text" class="form-input" placeholder="John Doe" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">EMAIL</label>
+                                    <input type="email" class="form-input" placeholder="john@company.com" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">COMPANY_DOMAIN</label>
+                                <input type="text" class="form-input" placeholder="https://myapp.com">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">ESTIMATED_DAILY_JOBS</label>
+                                <select class="form-input">
+                                    <option value="<100k">&lt; 100,000</option>
+                                    <option value="100k-1M">100,000 - 1,000,000</option>
+                                    <option value="1M-10M">1,000,000 - 10,000,000</option>
+                                    <option value=">10M">> 10,000,000</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">PRIMARY_ISSUE</label>
+                                <textarea class="form-input" placeholder="Describe your background job bottlenecks..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem;">SEND_AUDIT_REQUEST</button>
+                        </form>
+                        <div id="successMessage" style="display: none; text-align: center; padding: 2rem;">
+                            <i class="fa-solid fa-circle-check" style="color: var(--success); font-size: 3rem; margin-bottom: 1rem;"></i>
+                            <h3>Request Received</h3>
+                            <p class="text-secondary mono" style="font-size: 0.8rem; margin-top: 0.5rem;">TRANS_ID: 9x82k-audit-init</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+        <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Column 1: Brand -->
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <i class="fa-solid fa-bolt-lightning"></i> Side<span>Pulse</span>
+                    </a>
+                    <p style="margin-top: 1rem; margin-bottom: 2rem;">High-end Ruby on Rails background job optimization and infrastructure tuning for scaling SaaS teams.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Services -->
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Queue Performance</a></li>
+                        <li><a href="services.html">Memory Optimization</a></li>
+                        <li><a href="services.html">Dead Job Recovery</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Quick Links -->
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="case-studies.html">Case Studies</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Newsletter -->
+                <div class="footer-column">
+                    <h4>Stay Updated</h4>
+                    <p class="text-secondary" style="font-size: 0.95rem; margin-bottom: 1rem;">Join our newsletter for infrastructure inspiration and optimization tips.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email" required>
+                        <button type="submit">Join</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 SidePulse Labs. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('auditForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.getElementById('auditForm').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+        });
+    </script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
+
+
+
+

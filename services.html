@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | SidePulse Optimization</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .responsive-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+        @media (max-width: 1024px) {
+            .responsive-grid-2 {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header" class="scrolled">
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fa-solid fa-bolt-lightning"></i> Side<span>Pulse</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="home-2.html">Home 2</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
+                    <li><a href="case-studies.html">Case Studies</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="dashboard.html" class="btn btn-outline" style="padding: 0.4rem 1rem; font-size: 0.85rem; margin-left: 0.5rem;"><i class="fa-solid fa-chart-line"></i></a></li>
+                    <li class="header-actions-mobile" style="display: none; margin-top: 1rem;"><a href="login.html" class="btn btn-primary" style="width: 100%;" orientation="vertical">Login</a></li>
+                </ul>
+                <div class="header-actions">
+                    <button id="rtlToggle" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem;">RTL</button>
+                    <button id="themeToggle" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i class="fa-solid fa-moon"></i></button>
+                    <a href="login.html" class="btn btn-primary" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">Login</a>
+                    
+                </div>
+                <div id="mobileMenuToggle" class="mobile-menu-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section style="padding-top: 160px; padding-bottom: 60px;">
+            <div class="container">
+                <div style="max-width: 800px;">
+                    <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem;">Infrastructure <span class="text-gradient">Optimization Services</span></h1>
+                    <p class="text-secondary" style="font-size: 1.25rem;">We specialize in the deep technical layers of Ruby on Rails background processing. From Redis tuning to Ruby memory management, we make your jobs faster and more reliable.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem;">
+                    
+                    <div class="service-detail">
+                        <div style="width: 60px; height: 60px; background: rgba(14, 165, 233, 0.1); border-radius: 1rem; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
+                            <i class="fa-solid fa-gauge-simple-high" style="color: var(--accent); font-size: 1.5rem;"></i>
+                        </div>
+                        <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">Queue Performance Tuning</h2>
+                        <p class="text-secondary" style="margin-bottom: 2rem;">Generic Sidekiq setups often suffer from "noisy neighbor" problems. We implement advanced queue partitioning, weighted prioritization, and Redis shard balancing to ensure your critical jobs never wait.</p>
+                        <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem;" class="mono text-secondary">
+                            <li><i class="fa-solid fa-code-commit" style="color: var(--accent);"></i> Latency monitoring & reduction</li>
+                            <li><i class="fa-solid fa-code-commit" style="color: var(--accent);"></i> Redis connection pool optimization</li>
+                            <li><i class="fa-solid fa-code-commit" style="color: var(--accent);"></i> Queue sharding strategies</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-detail">
+                        <div style="width: 60px; height: 60px; background: rgba(14, 165, 233, 0.1); border-radius: 1rem; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
+                            <i class="fa-solid fa-memory" style="color: var(--accent); font-size: 1.5rem;"></i>
+                        </div>
+                        <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">Worker Memory Optimization</h2>
+                        <p class="text-secondary" style="margin-bottom: 2rem;">Sidekiq processes are notorious for bloating over time. We profile your workers to identify memory leaks, optimize ObjectSpace usage, and tune Ruby GVL concurrency to maximize RAM efficiency.</p>
+                        <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem;" class="mono text-secondary">
+                            <li><i class="fa-solid fa-code-commit" style="color: var(--accent);"></i> RSS bloat identification</li>
+                            <li><i class="fa-solid fa-code-commit" style="color: var(--accent);"></i> jemalloc integration</li>
+                            <li><i class="fa-solid fa-code-commit" style="color: var(--accent);"></i> Concurrency vs RAM balancing</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-detail">
+                        <div style="width: 60px; height: 60px; background: rgba(14, 165, 233, 0.1); border-radius: 1rem; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
+                            <i class="fa-solid fa-bug-slash" style="color: var(--accent); font-size: 1.5rem;"></i>
+                        </div>
+                        <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">Dead Job Recovery & Retries</h2>
+                        <p class="text-secondary" style="margin-bottom: 2rem;">Don't let your dead queue become a black hole. We implement smart retry logic, exponential backoff tuning, and automated recovery workflows for transient failures.</p>
+                        <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem;" class="mono text-secondary">
+                            <li><i class="fa-solid fa-code-commit" style="color: var(--accent);"></i> Failure pattern analysis</li>
+                            <li><i class="fa-solid fa-code-commit" style="color: var(--accent);"></i> Dead queue automation</li>
+                            <li><i class="fa-solid fa-code-commit" style="color: var(--accent);"></i> Custom error grouping</li>
+                        </ul>
+                    </div>
+
+        </section>
+
+        <!-- Unique Section 1: Infrastructure Blueprint -->
+        <section style="background: var(--gradient-dark); padding: 6rem 0; overflow: hidden;">
+            <div class="container">
+                <div class="responsive-grid-2">
+                    <div class="glass-card" style="padding: 2.5rem; position: relative;">
+                        <div class="mono" style="font-size: 0.7rem; color: var(--accent); margin-bottom: 2rem;">ARCHITECTURE_BLUEPRINT_V2</div>
+                        <div style="display: flex; flex-direction: column; gap: 2rem;">
+                            <div style="border: 1px solid var(--glass-border); padding: 1rem; border-radius: 0.5rem; background: rgba(255,255,255,0.03);">
+                                <div class="mono" style="font-size: 0.8rem; margin-bottom: 0.5rem;">RAILS_API_CLUSTER</div>
+                                <div style="display: flex; gap: 4px;">
+                                    <div style="height: 4px; width: 30px; background: var(--accent);"></div>
+                                    <div style="height: 4px; width: 30px; background: var(--accent);"></div>
+                                    <div style="height: 4px; width: 30px; background: rgba(255,255,255,0.1);"></div>
+                                </div>
+                            </div>
+                            <div style="text-align: center; color: var(--accent);"><i class="fa-solid fa-arrow-down"></i></div>
+                            <div style="border: 1px solid var(--accent); padding: 1rem; border-radius: 0.5rem; background: rgba(34, 211, 238, 0.05); box-shadow: 0 0 20px rgba(34, 211, 238, 0.1);">
+                                <div class="mono" style="font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--accent);">REDIS_SHARDED_POOL</div>
+                                <div style="display: flex; gap: 4px;">
+                                    <div style="height: 4px; flex-grow: 1; background: var(--accent);"></div>
+                                </div>
+                            </div>
+                            <div style="text-align: center; color: var(--accent);"><i class="fa-solid fa-arrow-down"></i></div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+                                <div style="border: 1px solid var(--glass-border); padding: 0.75rem; border-radius: 0.5rem; text-align: center;" class="mono">W_01</div>
+                                <div style="border: 1px solid var(--glass-border); padding: 0.75rem; border-radius: 0.5rem; text-align: center;" class="mono">W_02</div>
+                                <div style="border: 1px solid var(--glass-border); padding: 0.75rem; border-radius: 0.5rem; text-align: center;" class="mono">W_03</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">The <span class="text-gradient">SidePulse Blueprint</span></h2>
+                        <p class="text-secondary" style="margin-bottom: 2rem;">We don't just "fix" code. We re-engineer your background infrastructure to handle unpredictable spikes and high-concurrency Ruby execution.</p>
+                        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                            <div style="display: flex; gap: 1rem;">
+                                <i class="fa-solid fa-check" style="color: var(--success); margin-top: 4px;"></i>
+                                <div>
+                                    <h4 style="margin-bottom: 0.25rem;">Multi-Layer Caching</h4>
+                                    <p class="text-secondary" style="font-size: 0.9rem;">Advanced local and global cache layers to reduce Redis RTT.</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 1rem;">
+                                <i class="fa-solid fa-check" style="color: var(--success); margin-top: 4px;"></i>
+                                <div>
+                                    <h4 style="margin-bottom: 0.25rem;">Isolation Zones</h4>
+                                    <p class="text-secondary" style="font-size: 0.9rem;">Critical paths are isolated from high-volume background noise.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Unique Section 2: Optimization Impact Matrix -->
+        <section style="padding: 6rem 0;">
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 4rem;">
+                    <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">The <span class="text-gradient">Optimization Matrix</span></h2>
+                    <p class="text-secondary">Comparing standard enterprise setups vs. SidePulse engineered clusters.</p>
+                </div>
+
+                <div class="glass-card" style="overflow-x: auto; padding: 0;">
+                    <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                        <thead>
+                            <tr style="background: rgba(255,255,255,0.03);">
+                                <th style="padding: 1.5rem 2rem;" class="mono">METRIC_PARAMETER</th>
+                                <th style="padding: 1.5rem 2rem;" class="mono text-secondary">STANDARD_SETUP</th>
+                                <th style="padding: 1.5rem 2rem;" class="mono color-accent">SIDE_PULSE</th>
+                            </tr>
+                        </thead>
+                        <tbody class="mono" style="font-size: 0.9rem;">
+                            <tr style="border-bottom: 1px solid var(--glass-border);">
+                                <td style="padding: 1.5rem 2rem;">Queue Latency (P99)</td>
+                                <td style="padding: 1.5rem 2rem;" class="text-secondary">~850ms</td>
+                                <td style="padding: 1.5rem 2rem; color: var(--success);"><i class="fa-solid fa-bolt"></i> < 12ms</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--glass-border);">
+                                <td style="padding: 1.5rem 2rem;">RAM Usage (Per Worker)</td>
+                                <td style="padding: 1.5rem 2rem;" class="text-secondary">680MB</td>
+                                <td style="padding: 1.5rem 2rem; color: var(--success);">410MB (-40%)</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--glass-border);">
+                                <td style="padding: 1.5rem 2rem;">Redis Throughput</td>
+                                <td style="padding: 1.5rem 2rem;" class="text-secondary">2.5k j/s</td>
+                                <td style="padding: 1.5rem 2rem; color: var(--success);">18k j/s (+620%)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1.5rem 2rem;">Concurrency Safety</td>
+                                <td style="padding: 1.5rem 2rem;" class="text-secondary">Standard GVL</td>
+                                <td style="padding: 1.5rem 2rem; color: var(--success);">Tuned JEMALLOC</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Stack -->
+        <section style="background: var(--surface); padding: 6rem 0;">
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 4rem;">
+                    <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">The <span class="text-gradient">Performance Stack</span></h2>
+                    <p class="text-secondary">We integrate with your existing DevOps and backend tools.</p>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 3rem; opacity: 0.6;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 1.25rem; font-weight: 700;" class="mono">
+                        <i class="fa-brands fa-rust"></i> RUBY_ON_RAILS
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 1.25rem; font-weight: 700;" class="mono">
+                        <i class="fa-solid fa-database"></i> REDIS_STACK
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 1.25rem; font-weight: 700;" class="mono">
+                        <i class="fa-brands fa-docker"></i> KUBERNETES
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 1.25rem; font-weight: 700;" class="mono">
+                        <i class="fa-solid fa-chart-pie"></i> DATADOG
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 1.25rem; font-weight: 700;" class="mono">
+                        <i class="fa-solid fa-microchip"></i> GRAFANA
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+        <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Column 1: Brand -->
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <i class="fa-solid fa-bolt-lightning"></i> Side<span>Pulse</span>
+                    </a>
+                    <p style="margin-top: 1rem; margin-bottom: 2rem;">High-end Ruby on Rails background job optimization and infrastructure tuning for scaling SaaS teams.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Services -->
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Queue Performance</a></li>
+                        <li><a href="services.html">Memory Optimization</a></li>
+                        <li><a href="services.html">Dead Job Recovery</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Quick Links -->
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="case-studies.html">Case Studies</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Newsletter -->
+                <div class="footer-column">
+                    <h4>Stay Updated</h4>
+                    <p class="text-secondary" style="font-size: 0.95rem; margin-bottom: 1rem;">Join our newsletter for infrastructure inspiration and optimization tips.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email" required>
+                        <button type="submit">Join</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 SidePulse Labs. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
+
+
+
+
