@@ -19,6 +19,8 @@
         }
         .services-hero-wrap {
             max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
         }
         @media (max-width: 1024px) {
             .responsive-grid-2 {
@@ -50,6 +52,14 @@
                 font-size: 1.1rem !important;
             }
         }
+        .service-detail {
+            display: flex;
+            flex-direction: column;
+        }
+        .service-detail .service-cta {
+            margin-top: auto;
+            padding-top: 2rem;
+        }
     </style>
 </head>
 <body>
@@ -71,8 +81,8 @@
                     <li class="header-actions-mobile" style="display: none; margin-top: 1rem;"><a href="login.html" class="btn btn-primary" style="width: 100%;" orientation="vertical">Login</a></li>
                 </ul>
                 <div class="header-actions">
-                    <button id="rtlToggle" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem;">RTL</button>
-                    <button id="themeToggle" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i class="fa-solid fa-moon"></i></button>
+                    <button id="rtlToggle" class="btn btn-outline" style="height: 36px; padding: 0 1rem; font-size: 0.8rem;">RTL</button>
+                    <button id="themeToggle" class="btn btn-outline" style="width: 36px; height: 36px; padding: 0; font-size: 0.8rem;"><i class="fa-solid fa-moon"></i></button>
                     <a href="login.html" class="btn btn-primary" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">Login</a>
                     
                 </div>
@@ -84,11 +94,11 @@
     </header>
 
     <main>
-        <section style="padding-top: 160px; padding-bottom: 60px;">
+        <section class="page-hero" style="padding-top: 160px; padding-bottom: 60px;">
             <div class="container">
                 <div class="services-hero-wrap">
                     <h1 class="services-hero-title" style="font-size: 3.5rem; margin-bottom: 1.5rem;">Infrastructure <span class="text-gradient">Optimization Services</span></h1>
-                    <p class="text-secondary services-hero-copy" style="font-size: 1.25rem;">We specialize in the deep technical layers of Ruby on Rails background processing. From Redis tuning to Ruby memory management, we make your jobs faster and more reliable.</p>
+                    <p class="text-secondary services-hero-copy" style="font-size: 1.25rem;">I specialize in the deep technical layers of Ruby on Rails background processing. From Redis tuning to Ruby memory management, I make your jobs faster and more reliable.</p>
                 </div>
             </div>
         </section>
@@ -102,12 +112,13 @@
                             <i class="fa-solid fa-gauge-simple-high" style="color: var(--accent); font-size: 1.5rem;"></i>
                         </div>
                         <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">Queue Performance Tuning</h2>
-                        <p class="text-secondary" style="margin-bottom: 2rem;">Generic Sidekiq setups often suffer from "noisy neighbor" problems. We implement advanced queue partitioning, weighted prioritization, and Redis shard balancing to ensure your critical jobs never wait.</p>
+                        <p class="text-secondary" style="margin-bottom: 2rem;">Generic Sidekiq setups often suffer from "noisy neighbor" problems. I implement advanced queue partitioning, weighted prioritization, and Redis shard balancing to ensure your critical jobs never wait.</p>
                         <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem;" class="mono text-secondary">
                             <li><i class="fa-solid fa-code-commit" style="color: var(--accent);"></i> Latency monitoring & reduction</li>
                             <li><i class="fa-solid fa-code-commit" style="color: var(--accent);"></i> Redis connection pool optimization</li>
                             <li><i class="fa-solid fa-code-commit" style="color: var(--accent);"></i> Queue sharding strategies</li>
                         </ul>
+                        <a href="contact.html" class="service-cta" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent); text-decoration: none; font-weight: 600;">Learn More <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem;"></i></a>
                     </div>
 
                     <div class="service-detail">
@@ -115,12 +126,13 @@
                             <i class="fa-solid fa-memory" style="color: var(--accent); font-size: 1.5rem;"></i>
                         </div>
                         <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">Worker Memory Optimization</h2>
-                        <p class="text-secondary" style="margin-bottom: 2rem;">Sidekiq processes are notorious for bloating over time. We profile your workers to identify memory leaks, optimize ObjectSpace usage, and tune Ruby GVL concurrency to maximize RAM efficiency.</p>
+                        <p class="text-secondary" style="margin-bottom: 2rem;">Sidekiq processes are notorious for bloating over time. I profile your workers to identify memory leaks, optimize ObjectSpace usage, and tune Ruby GVL concurrency to maximize RAM efficiency.</p>
                         <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem;" class="mono text-secondary">
                             <li><i class="fa-solid fa-code-commit" style="color: var(--accent);"></i> RSS bloat identification</li>
                             <li><i class="fa-solid fa-code-commit" style="color: var(--accent);"></i> jemalloc integration</li>
                             <li><i class="fa-solid fa-code-commit" style="color: var(--accent);"></i> Concurrency vs RAM balancing</li>
                         </ul>
+                        <a href="contact.html" class="service-cta" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent); text-decoration: none; font-weight: 600;">Learn More <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem;"></i></a>
                     </div>
 
                     <div class="service-detail services-menu-third">
@@ -128,12 +140,13 @@
                             <i class="fa-solid fa-bug-slash" style="color: var(--accent); font-size: 1.5rem;"></i>
                         </div>
                         <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">Dead Job Recovery & Retries</h2>
-                        <p class="text-secondary" style="margin-bottom: 2rem;">Don't let your dead queue become a black hole. We implement smart retry logic, exponential backoff tuning, and automated recovery workflows for transient failures.</p>
+                        <p class="text-secondary" style="margin-bottom: 2rem;">Don't let your dead queue become a black hole. I implement smart retry logic, exponential backoff tuning, and automated recovery workflows for transient failures.</p>
                         <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem;" class="mono text-secondary">
                             <li><i class="fa-solid fa-code-commit" style="color: var(--accent);"></i> Failure pattern analysis</li>
                             <li><i class="fa-solid fa-code-commit" style="color: var(--accent);"></i> Dead queue automation</li>
                             <li><i class="fa-solid fa-code-commit" style="color: var(--accent);"></i> Custom error grouping</li>
                         </ul>
+                        <a href="contact.html" class="service-cta" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent); text-decoration: none; font-weight: 600;">Learn More <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem;"></i></a>
                     </div>
 
         </section>
@@ -170,7 +183,7 @@
                     </div>
                     <div>
                         <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">The <span class="text-gradient">SidePulse Blueprint</span></h2>
-                        <p class="text-secondary" style="margin-bottom: 2rem;">We don't just "fix" code. We re-engineer your background infrastructure to handle unpredictable spikes and high-concurrency Ruby execution.</p>
+                        <p class="text-secondary" style="margin-bottom: 2rem;">I don't just "fix" code. I re-engineer your background infrastructure to handle unpredictable spikes and high-concurrency Ruby execution.</p>
                         <div style="display: flex; flex-direction: column; gap: 1.5rem;">
                             <div style="display: flex; gap: 1rem;">
                                 <i class="fa-solid fa-check" style="color: var(--success); margin-top: 4px;"></i>
@@ -241,7 +254,7 @@
             <div class="container">
                 <div style="text-align: center; margin-bottom: 4rem;">
                     <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">The <span class="text-gradient">Performance Stack</span></h2>
-                    <p class="text-secondary">We integrate with your existing DevOps and backend tools.</p>
+                    <p class="text-secondary">I integrate with your existing DevOps and backend tools.</p>
                 </div>
                 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 3rem; opacity: 0.6;">
                     <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 1.25rem; font-weight: 700;" class="mono">
@@ -272,7 +285,7 @@
                     <a href="index.html" class="logo">
                         <i class="fa-solid fa-bolt-lightning"></i> Side<span>Pulse</span>
                     </a>
-                    <p style="margin-top: 1rem; margin-bottom: 2rem;">High-end Ruby on Rails background job optimization and infrastructure tuning for scaling SaaS teams.</p>
+                    <p style="margin-top: 1rem; margin-bottom: 2rem;">High-end Ruby on Rails background job optimization and infrastructure tuning for scaling SaaS businesses.</p>
                     <div class="social-links">
                         <a href="#" class="social-icon"><i class="fa-brands fa-github"></i></a>
                         <a href="#" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a>
@@ -296,14 +309,14 @@
                     <ul class="footer-links">
                         <li><a href="case-studies.html">Case Studies</a></li>
                         <li><a href="pricing.html">Pricing</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="contact.html">Contact Me</a></li>
                     </ul>
                 </div>
 
                 <!-- Column 4: Newsletter -->
                 <div class="footer-column">
                     <h4>Stay Updated</h4>
-                    <p class="text-secondary" style="font-size: 0.95rem; margin-bottom: 1rem;">Join our newsletter for infrastructure inspiration and optimization tips.</p>
+                    <p class="text-secondary" style="font-size: 0.95rem; margin-bottom: 1rem;">Join my newsletter for infrastructure inspiration and optimization tips.</p>
                     <form class="newsletter-form">
                         <input type="email" placeholder="Your Email" required>
                         <button type="submit">Join</button>
